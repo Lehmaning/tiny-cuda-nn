@@ -1,0 +1,58 @@
+[build-system]
+requires = [
+    "setuptools>=42",
+    "wheel",
+    "torch",
+	"numpy"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tinycudann"
+version = "1.6"
+description = "tiny-cuda-nn extension for PyTorch"
+license-files=["LICENSE.txt"]
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+    { name = "Thomas Müller", email = "tmueller@nvidia.com" },
+    { name = "Jacob Munkberg", email = "jmunkberg@nvidia.com" },
+    { name = "Jon Hasselgren", email = "jhasselgren@nvidia.com" },
+    { name = "Or Perel", email = "operel@nvidia.com" },
+]
+maintainers = [
+    { name = "Thomas Müller", email = "tmueller@nvidia.com" },
+]
+keywords = ["PyTorch", "cutlass", "machine learning"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: GPU :: NVIDIA CUDA",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: C++",
+    "Programming Language :: CUDA",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Multimedia :: Graphics",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Image Processing",
+]
+dependencies = [
+    "numpy>=1.24.4",
+    "torch>=2.6.0",
+]
+urls = { Homepage = "https://github.com/nvlabs/tiny-cuda-nn" }
+
+[tool.setuptools]
+packages = ["bindings.torch.tinycudann"]
+include-package-data = true
+zip-safe = false
+
+[tool.setuptools.cmdclass]
+build_ext = "torch.utils.cpp_extension.BuildExtension"
+
+[tool.uv.sources]
+torch = [
+  { index = "pytorch-cu126" },
+]
+torchvision = [
+  { index = "pytorch-cu126" },
+]
